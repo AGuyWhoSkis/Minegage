@@ -1,0 +1,5 @@
+name: Skyblock
+version: 0.0
+main: SkyblockPlugin
+author: Skis
+depend: [Vault]

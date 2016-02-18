@@ -1,0 +1,4 @@
+name: Recording
+version: 0.0
+main: net.minegage.recording.RecordingPlugin
+author: Skis

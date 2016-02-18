@@ -1,0 +1,5 @@
+name: FactionsGage
+version: 0.0
+main: net.minegage.factions.FactionsPlugin
+depend: [Vault, Factions, MassiveCore]
+author: Skis

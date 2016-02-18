@@ -1,0 +1,5 @@
+name: CreativeGage
+main: net.minegage.creative.CreativePlugin
+version: 0.0
+author: Skis
+depend: [Vault]

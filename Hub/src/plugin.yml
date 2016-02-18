@@ -1,0 +1,6 @@
+name: HubGage
+version: 0.0
+main: net.minegage.hub.HubPlugin
+depend: [Vault, ProtocolLib, PacketWrapper]
+author: Skis
+load: STARTUP

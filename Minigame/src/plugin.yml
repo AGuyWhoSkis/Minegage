@@ -1,0 +1,6 @@
+name: Minigame
+version: 0.0
+main: net.minegage.minigame.Minigame
+depend: [Vault, ProtocolLib, PacketWrapper]
+author: Skis
+load: STARTUP

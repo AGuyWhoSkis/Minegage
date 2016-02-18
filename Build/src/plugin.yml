@@ -1,0 +1,6 @@
+name: Build
+version: 0.0
+main: net.minegage.build.Build
+depend: [Vault, ProtocolLib]
+author: Skis
+loadbefore: [Worldedit, Essentials]
