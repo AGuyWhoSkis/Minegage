@@ -12,8 +12,8 @@ import net.minegage.minigame.MinigameManager;
 import net.minegage.minigame.board.helper.SurvivalHelper;
 import net.minegage.minigame.game.GameFFA;
 import net.minegage.minigame.game.GameType;
-import net.minegage.minigame.game.common.loot.LootManager;
-import net.minegage.minigame.game.common.loot.MultiLoot;
+import net.minegage.common.loot.Looter;
+import net.minegage.common.loot.MultiLoot;
 import net.minegage.minigame.game.games.skywars.kits.KitSurvivor;
 import org.bukkit.Material;
 import org.bukkit.block.BlockState;
@@ -27,7 +27,7 @@ import org.bukkit.inventory.ItemStack;
 public class GameSkywars
 		extends GameFFA {
 
-	private LootManager lootManager;
+	private Looter looter;
 
 	public GameSkywars(MinigameManager manager) {
 		super(manager, GameType.SKYWARS, new String[] { "Don't fall! Last person alive wins!", "Loot chests to get items!" }, new KitSurvivor());
@@ -53,7 +53,7 @@ public class GameSkywars
 
 		getBoardManager().addBoardHelper(new SurvivalHelper(this));
 
-		lootManager = new LootManager(this);
+		looter = new Looter(this);
 
 		ItemBuild cobble = ItemBuild.create(Material.COBBLESTONE);
 		ItemBuild wood   = ItemBuild.create(Material.WOOD);
@@ -69,57 +69,56 @@ public class GameSkywars
 		ItemBuild pearl = ItemBuild.create(Material.ENDER_PEARL);
 
 		// Normal loot
-		lootManager.loot(0, Material.IRON_SWORD, Material.DIAMOND_SWORD, Material.IRON_AXE, Material.FISHING_ROD, Material.BOW, Material.FLINT_AND_STEEL);
-		lootManager.loot(0, Material.WATER_BUCKET);
+		looter.loot(0, Material.IRON_SWORD, Material.DIAMOND_SWORD, Material.IRON_AXE, Material.FISHING_ROD, Material.BOW, Material.FLINT_AND_STEEL);
+		looter.loot(0, Material.WATER_BUCKET);
 
-		lootManager.loot(0, Material.COBBLESTONE, 24, 32);
-		lootManager.loot(0, Material.WOOD, 24, 32);
-		lootManager.loot(0, Material.TNT);
+		looter.loot(0, Material.COBBLESTONE, 24, 32);
+		looter.loot(0, Material.WOOD, 24, 32);
+		looter.loot(0, Material.TNT);
 
-		lootManager.loot(0, Material.SNOW_BALL, 2, 4);
-		lootManager.loot(0, Material.EGG, 2, 4);
+		looter.loot(0, Material.SNOW_BALL, 2, 4);
+		looter.loot(0, Material.EGG, 2, 4);
 
-		lootManager.loot(0, new MultiLoot(lootManager.create(Material.BOW), lootManager.create(Material.ARROW, 2, 4)));
+		looter.loot(0, new MultiLoot(looter.create(Material.BOW), looter.create(Material.ARROW, 2, 4)));
 
 		for (ItemStack armour : UtilArmour.getArmourSet(ArmourType.LEATHER)) {
-			lootManager.loot(0, armour);
+			looter.loot(0, armour);
 		}
 		for (ItemStack armour : UtilArmour.getArmourSet(ArmourType.GOLD)) {
-			lootManager.loot(0, armour);
+			looter.loot(0, armour);
 		}
 		for (ItemStack armour : UtilArmour.getArmourSet(ArmourType.IRON)) {
-			lootManager.loot(0, armour);
+			looter.loot(0, armour);
 		}
 
 		// Good loot
-		lootManager.loot(1, Material.DIAMOND_SWORD, Material.DIAMOND_AXE, Material.FISHING_ROD);
-		lootManager.loot(1, Material.BOW, Material.FLINT_AND_STEEL);
-		lootManager.loot(1, Material.LAVA_BUCKET, Material.WATER_BUCKET);
+		looter.loot(1, Material.DIAMOND_SWORD, Material.DIAMOND_AXE, Material.FISHING_ROD);
+		looter.loot(1, Material.BOW, Material.FLINT_AND_STEEL);
+		looter.loot(1, Material.LAVA_BUCKET, Material.WATER_BUCKET);
 
 		for (ItemStack armour : UtilArmour.getArmourSet(ArmourType.IRON)) {
-			lootManager.loot(1, armour);
+			looter.loot(1, armour);
 		}
 		for (ItemStack armour : UtilArmour.getArmourSet(ArmourType.DIAMOND)) {
-			lootManager.loot(1, armour);
+			looter.loot(1, armour);
 		}
 
-		lootManager.loot(0, new MultiLoot(lootManager.create(Material.BOW), lootManager.create(Material.ARROW, 8, 16)));
+		looter.loot(0, new MultiLoot(looter.create(Material.BOW), looter.create(Material.ARROW, 8, 16)));
 
-		lootManager.loot(1, Material.GOLDEN_APPLE, 1, 2);
+		looter.loot(1, Material.GOLDEN_APPLE, 1, 2);
 
-		lootManager.loot(1, pearl.amount(3).item(), pearl.amount(2).item());
+		looter.loot(1, pearl.amount(3).item(), pearl.amount(2).item());
 
-		lootManager.loot(0, Material.COBBLESTONE, 24, 32);
-		lootManager.loot(0, Material.WOOD, 24, 32);
+		looter.loot(0, Material.COBBLESTONE, 24, 32);
+		looter.loot(0, Material.WOOD, 24, 32);
 
-		lootManager.loot(0, Material.TNT, 2, 3);
+		looter.loot(0, Material.TNT, 2, 3);
 	}
 
 	@Override
 	protected void onDisable() {
 		super.onDisable();
-
-		lootManager.disable();
+		looter.disable();
 	}
 
 	@EventHandler
@@ -147,7 +146,7 @@ public class GameSkywars
 			return;
 		}
 
-		lootManager.fillInventory(inv, tier, minItems, maxItems);
+		looter.fillInventory(inv, looter.getLoot(tier, minItems, maxItems));
 	}
 
 	@Override

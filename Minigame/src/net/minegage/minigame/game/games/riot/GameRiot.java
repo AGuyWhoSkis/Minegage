@@ -19,8 +19,8 @@ import net.minegage.core.combat.event.CombatDeathEvent;
 import net.minegage.minigame.MinigameManager;
 import net.minegage.minigame.game.GameTDM;
 import net.minegage.minigame.game.GameType;
-import net.minegage.minigame.game.common.loot.LootManager;
-import net.minegage.minigame.game.common.loot.MultiLoot;
+import net.minegage.common.loot.Looter;
+import net.minegage.common.loot.MultiLoot;
 import net.minegage.minigame.game.games.riot.kit.KitCop;
 import net.minegage.minigame.game.games.riot.kit.KitFirefighter;
 import net.minegage.minigame.game.games.riot.kit.KitRioter;
@@ -59,7 +59,7 @@ public class GameRiot
 	
 	private final String POINTS_KEY = "Riot Points";
 
-	private LootManager lootManager;
+	private Looter looter;
 
 	// The chaos required for the rioters to win
 	private int chaosPerRioter;
@@ -92,21 +92,27 @@ public class GameRiot
 		this.timed = true;
 		this.timeLimit = 60 * 3;
 
-		this.lootManager = new LootManager(this);
+		this.looter = new Looter(this);
 
-		lootManager.loot(0, Material.SNOW_BALL, 4, 12);
-		lootManager.loot(0, Material.EGG, 4, 12);
+		looter.loot(0, Material.SNOW_BALL, 4, 12);
+		looter.loot(0, Material.EGG, 4, 12);
 
-		lootManager.loot(0, Material.WOOD_AXE, Material.WOOD_PICKAXE, Material.GOLD_AXE, Material.GOLD_PICKAXE, Material.STONE_PICKAXE);
+		looter.loot(0, Material.WOOD_AXE, Material.WOOD_PICKAXE, Material.GOLD_AXE, Material.GOLD_PICKAXE, Material.STONE_PICKAXE);
 
-		lootManager.loot(0, Material.LADDER, 4, 6);
-		lootManager.loot(0, new MultiLoot(lootManager.create(Material.BOW), lootManager.create(Material.ARROW, 2, 4)));
+		looter.loot(0, Material.LADDER, 4, 6);
+		looter.loot(0, new MultiLoot(looter.create(Material.BOW), looter.create(Material.ARROW, 2, 4)));
 
-		lootManager.loot(1, Material.TNT, 1, 3);
-		lootManager.loot(1, Material.FIREBALL, Material.STONE_SWORD, Material.STONE_AXE);
-		lootManager.loot(1, new MultiLoot(lootManager.create(Material.BOW), lootManager.create(Material.ARROW, 4, 8)));
+		looter.loot(1, Material.TNT, 1, 3);
+		looter.loot(1, Material.FIREBALL, Material.STONE_SWORD, Material.STONE_AXE);
+		looter.loot(1, new MultiLoot(looter.create(Material.BOW), looter.create(Material.ARROW, 4, 8)));
 	}
 
+	@Override
+	protected void onDisable() {
+		super.onDisable();
+
+		looter.disable();
+	}
 
 	@Override
 	public void loadWorldData(DataFile worldData) {
@@ -151,7 +157,7 @@ public class GameRiot
 		return getBalanceDifference() > 7.5;
 	}
 
-	public List<ItemStack> getRandLoot() {
+	public Set<ItemStack> getRandLoot() {
 		double goodLootChance = 20;
 		if (isRiotBoosted()) {
 			goodLootChance = 40;
@@ -162,7 +168,7 @@ public class GameRiot
 			tier = 1;
 		}
 
-		return lootManager.getLoot(tier, 2, 5);
+		return looter.getLoot(tier, 2, 5);
 	}
 
 	@Override
