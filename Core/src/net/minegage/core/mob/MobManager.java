@@ -165,15 +165,19 @@ public abstract class MobManager<T extends Mob>
 	public void loadMob(T mob, LivingEntity entity) {
 		mob.load(entity);
 
-		runSyncDelayed(10L, () -> {
-			for (String tag : mob.tags) {
-				UtilEntity.removePassengers(entity);
+		runSyncDelayed(20L, () -> {
+			if (mob.isEntityLoaded()) {
+				for (String tag : mob.tags) {
+					UtilEntity.removePassengers(entity);
+				}
 			}
 		});
 
-		runSyncDelayed(20L, () -> {
-			for (String tag : mob.tags) {
-				UtilEntity.addTag(entity, tag);
+		runSyncDelayed(30L, () -> {
+			if (mob.isEntityLoaded()) {
+				for (String tag : mob.tags) {
+					UtilEntity.addTag(entity, tag);
+				}
 			}
 		});
 	}
@@ -276,7 +280,7 @@ public abstract class MobManager<T extends Mob>
 	}
 
 	public final void clearMobs(World world) {
-		getFile(world).delete();
+		FileUtils.deleteQuietly(getFile(world));
 
 		String worldName = world.getName();
 
