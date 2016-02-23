@@ -39,7 +39,8 @@ public class MoveManager
 		for (Entry<Player, MoveToken> entry : playerMovement.entrySet()) {
 			Player    player   = entry.getKey();
 			MoveToken token = entry.getValue();
-			
+
+			// Movement
 			Location lastLocation = token.lastLocation;
 			Location currentLocation = player.getLocation();
 			
@@ -54,6 +55,13 @@ public class MoveManager
 				token.lastMoved = currentMillis;
 				token.lastMouseMoved = currentMillis;
 				token.lastLocation = currentLocation;
+			}
+
+			// Sneak
+			if (player.isSneaking()) {
+				token.lastSneaking = currentMillis;
+			} else if (!player.isSneaking()) {
+				token.lastStanding = currentMillis;
 			}
 		}
 	}
