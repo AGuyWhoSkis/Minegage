@@ -1,9 +1,9 @@
-package net.minegage.minigame.game.common.loot;
+package net.minegage.common.loot;
 
 import org.bukkit.inventory.ItemStack;
 
 /**
-Loot consisting of multiple items; for example a bow and arrows
+	For items which should be grouped together; for example a bow and arrow
  */
 public class MultiLoot
 		extends Loot {

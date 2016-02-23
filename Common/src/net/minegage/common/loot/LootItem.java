@@ -1,4 +1,4 @@
-package net.minegage.minigame.game.common.loot;
+package net.minegage.common.loot;
 
 import net.minegage.common.util.Rand;
 import org.bukkit.inventory.ItemStack;
