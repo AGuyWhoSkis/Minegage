@@ -22,6 +22,11 @@ public class ItemBuild {
 		return new ItemBuild(type);
 	}
 
+	// Shortened alias
+	public static ItemBuild c(Material type) {
+		return create(type);
+	}
+
 	public static ItemBuild pot(PotionType type, int level) { return new ItemBuild(Material.POTION).potion(new Potion(type, level)); }
 	
 	private ItemStack item;
