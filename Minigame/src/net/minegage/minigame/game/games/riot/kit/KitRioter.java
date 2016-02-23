@@ -9,12 +9,12 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-import java.util.List;
+import java.util.Set;
 
 
 public class KitRioter
 		extends Kit {
-		
+
 	public KitRioter() {
 		super("Rioter", new String[] { "Receives random items to riot with!" }, new AttribThrowableTNT());
 	}
@@ -55,7 +55,7 @@ public class KitRioter
 
 	}
 	
-	private List<ItemStack> getRandLoot() {
+	private Set<ItemStack> getRandLoot() {
 		return ( (GameRiot) getGame() ).getRandLoot();
 	}
 	
