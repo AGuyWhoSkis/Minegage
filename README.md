@@ -1,5 +1,5 @@
-# Minegage-Core
-Clone of Core framework for Minegage
+# Minegage
+Clone of Minegage Framework - A Minecraft Server API that includes a huge number of useful tools. Includes generally useful utility functions for Java, more intuitive wrapper classes for CraftBukkit code, and a polished, feature rich library for developing server side plugins. The implementation of this library is included in the Minigame, Hub, Build, Creative, Factions, and SOTF folders. 
 
 ### Structure
 This project is grouped into several libraries, which can be attached as necessary to create new libraries depending on the required scope.
