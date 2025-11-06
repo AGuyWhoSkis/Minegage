@@ -1,5 +1,13 @@
-# Minegage
-Clone of Minegage Framework - A Minecraft Server API that includes a huge number of useful tools. Includes generally useful utility functions for Java, more intuitive wrapper classes for CraftBukkit code, and a polished, feature rich library for developing server side plugins. The implementation of this library is included in the Minigame, Hub, Build, Creative, Factions, and SOTF folders. 
+# Minegage - what's that?
+Minegage was an online community, website, and Minecraft Server. This library contains code for four different Minegage plugins, each hosted as a standalone plugin.
+
+Players initially connected to the 'Hub' server, which bridged to all other servers. Each 'Minigame' server instance hosted custom games with ~20 concurrent players.
+
+The point of this repository was that it simplified the underlying Minecraft Server API. For example, the Minecraft client could display a Scoreboard with multiple rows of text, but displaying that was a lot more complicated than calling .Display(someText). So Board.java was made to bridge this gap and allow any text to be displayed with a single function call. Board.java even supports slow scrolling through text if it exceeds the maximum length.
+
+---
+
+This repo includes generally useful utility functions for Java, more intuitive wrapper classes for CraftBukkit code, and a polished, feature rich library for developing server side plugins. The implementation of this library is included in the Minigame, Hub, Build, Creative, Factions, and SOTF folders. 
 
 ### Structure
 This project is grouped into several libraries, which can be attached as necessary to create new libraries depending on the required scope.
