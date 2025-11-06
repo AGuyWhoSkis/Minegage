@@ -5,6 +5,8 @@ Players initially connected to the 'Hub' server, which bridged to all other serv
 
 The point of this repository was that it simplified the underlying Minecraft Server API. For example, the Minecraft client could display a Scoreboard with multiple rows of text, but displaying that was a lot more complicated than calling .Display(someText). So Board.java was made to bridge this gap and allow any text to be displayed with a single function call. Board.java even supports slow scrolling through text if it exceeds the maximum length.
 
+By multiplying this advantage across 100+ features, development speed only ever increased. The Paintball minigame was completed in just a few lines of code, yet it was one of the most popular!
+
 ---
 
 This repo includes generally useful utility functions for Java, more intuitive wrapper classes for CraftBukkit code, and a polished, feature rich library for developing server side plugins. The implementation of this library is included in the Minigame, Hub, Build, Creative, Factions, and SOTF folders. 
